@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 #const JUMP_VELOCITY = -400.0
+@export var playerNum: int = 1
 
 
 func _physics_process(delta: float) -> void:
@@ -16,7 +17,12 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_up", "ui_down")
+	var direction: float = 0
+	if (playerNum == 1):
+		direction = Input.get_axis("player1_up", "player1_down")
+	else:
+		direction = Input.get_axis("player2_up", "player2_down")
+	
 	if direction:
 		velocity.y = direction * SPEED
 	else:
